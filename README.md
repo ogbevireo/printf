@@ -177,7 +177,7 @@ Repo:
 1. Education is when you read the fine print. Experience is what you get if you don't
 mandatory
 
-    ##Handle the following conversion specifiers:
+   Handle the following conversion specifiers:
 
     d
     i
@@ -223,7 +223,7 @@ Repo:
 3. What one has not experienced, one will never understand in print
 #advanced
 
-    Handle the following conversion specifiers:
+  Handle the following conversion specifiers:
 
     u
     o
@@ -241,7 +241,8 @@ Repo:
 4. Nothing in fine print is ever good news
 #advanced
 
-    Use a local buffer of 1024 chars in order to call write as little as possible.
+      Use a local buffer of 1024 chars in order to call write as little as possible.
+      .
 
 Repo:
 
@@ -280,7 +281,7 @@ Repo:
 6. How is the world ruled and led to war? Diplomats lie to journalists and believe these lies when they see them in print
 #advanced
 
-    Handle the following conversion specifier: p.
+   Handle the following conversion specifier: p.
 
     You don’t have to handle the flag characters
     You don’t have to handle field width
@@ -294,7 +295,7 @@ Repo:
 7. The big print gives and the small print takes away
 #advanced
 
-    Handle the following flag characters for non-custom conversion specifiers:
+   Handle the following flag characters for non-custom conversion specifiers:
 
     +
     space
@@ -307,7 +308,7 @@ Repo:
 8. Sarcasm is lost in print
 #advanced
 
-    Handle the following length modifiers for non-custom conversion specifiers:
+   Handle the following length modifiers for non-custom conversion specifiers:
 
     l
     h
@@ -322,6 +323,7 @@ Repo:
 #advanced
 
     Handle the field width for non-custom conversion specifiers.
+    .
 
 Repo:
 
@@ -331,6 +333,7 @@ Repo:
 #advanced
 
     Handle the precision for non-custom conversion specifiers.
+    .
 
 Repo:
 
@@ -340,6 +343,7 @@ Repo:
 #advanced
 
     Handle the 0 flag character for non-custom conversion specifiers.
+    .
 
 Repo:
 
@@ -349,6 +353,7 @@ Repo:
 #advanced
 
     Handle the - flag character for non-custom conversion specifiers.
+    .
 
 Repo:
 
@@ -357,7 +362,7 @@ Repo:
 13. Print is the sharpest and the strongest weapon of our party
 #advanced
 
-    Handle the following custom conversion specifier:
+   Handle the following custom conversion specifier:
 
     r : prints the reversed string
 
@@ -368,7 +373,7 @@ Repo:
 14. The flood of print has turned reading into a process of gulping rather than savoring
 #advanced
 
-    Handle the following custom conversion specifier:
+   Handle the following custom conversion specifier:
 
     R: prints the rot13'ed string
 
@@ -380,6 +385,7 @@ Repo:
 #advanced
 
     All the above options work well together.
+    .
 
 Repo:
 
