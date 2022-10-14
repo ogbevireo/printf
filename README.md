@@ -1,22 +1,22 @@
-# 0x11. C - printf
-##CGroup project
+ 0x11. C - printf
+CGroup project
 
     Project to be done in teams of 2 people (our team: Abdo Osama, Ogbevire OBOGROW)
     Project start Oct 14, 2022 5:00 AM, end by Oct 19, 2022 5:00 AM
     Project is released at Oct 15, 2022 11:00 AM
 
-##Concepts
+Concepts
 
     Group Projects
     Pair Programming - How To
     Flowcharts
     Technical Writing
 
-##Background Context
+Background Context
 
 Write your own printf function.
 
-##Resources
+Resources
 
     Secrets of printf
     Group Projects concept page (Don’t forget to read this)
@@ -26,8 +26,8 @@ man or help:
 
     printf (3)
 
-# Requirements
-##General
+ Requirements
+General
 
     Allowed editors: vi, vim, emacs
     All files will be compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic -std=gnu89
@@ -42,7 +42,7 @@ man or help:
     All your header files should be include guarded
     Note that we will not provide the _putchar function for this project
 
-##GitHub
+GitHub
 
 There should be one project repository per group. The other members do not fork or clone the project to ensure only one of the team has the repository in their github account otherwise you risk scoring 0%
 More Info
@@ -56,7 +56,7 @@ Authorized functions and macros
     va_copy (man 3 va_copy)
     va_arg (man 3 va_arg)
 
-##Compilation
+Compilation
 
     Your code will be compiled this way:
 
@@ -65,7 +65,7 @@ $ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c
     As a consequence, be careful not to push any c file containing a main function in the root directory of your project (you could have a test folder containing all your tests files including main functions)
     Our main files will include your main header file (main.h): #include main.h
     You might want to look at the gcc flag -Wno-format when testing with your _printf and the standard printf. Example of test file that you could use:
-'
+
 alex@ubuntu:~/c/printf$ cat main.c 
 #include <limits.h>
 #include <stdio.h>
@@ -138,22 +138,22 @@ Len:[12]
 Unknown:[%r]
 Unknown:[%r]
 alex@ubuntu:~/c/printf$
-'
+
     We strongly encourage you to work all together on a set of tests
     If the task does not specify what to do with an edge case, do the same as printf
 
-##Copyright - Plagiarism
+Copyright - Plagiarism
 
     You are tasked to come up with solutions for the tasks below yourself to meet with the above learning objectives.
     You will not be able to meet the objectives of this or any following project by copying and pasting someone else’s work.
     You are not allowed to publish any content of this project.
     Any form of plagiarism is strictly forbidden and will result in removal from the program.
 
-#Tasks
-##0. I'm not going anywhere. You can print that wherever you want to. I'm here and I'm a Spur for life
+Tasks
+0. I'm not going anywhere. You can print that wherever you want to. I'm here and I'm a Spur for life
 mandatory
 
-##Write a function that produces output according to a format.
+Write a function that produces output according to a format.
 
     Prototype: int _printf(const char *format, ...);
     Returns  : the number of characters printed (excluding the null byte used to end output to strings)
@@ -172,7 +172,7 @@ Repo:
 
     GitHub repository: printf
 
-##1. Education is when you read the fine print. Experience is what you get if you don't
+1. Education is when you read the fine print. Experience is what you get if you don't
 mandatory
 
 ##Handle the following conversion specifiers:
