@@ -66,7 +66,7 @@ $ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c
     Our main files will include your main header file (main.h): #include main.h
     You might want to look at the gcc flag -Wno-format when testing with your _printf and the standard printf. Example of test file that you could use:
 
-'alex@ubuntu:~/c/printf$ cat main.c 
+'alex@ubuntu:~/c/printf$ cat main.c '
 #include <limits.h>
 #include <stdio.h>
 #include "main.h"
@@ -138,7 +138,7 @@ Len:[12]
 Unknown:[%r]
 Unknown:[%r]
 alex@ubuntu:~/c/printf$
-'
+
 
     We strongly encourage you to work all together on a set of tests
     If the task does not specify what to do with an edge case, do the same as printf
