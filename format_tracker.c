@@ -1,46 +1,20 @@
 #include "main.h"
 
 /**
- * fs_register - registers and tracks all valid format specifiers
- * @sp: character as an input to check if it is valid specifier
- *
- * Return: bool (true or false)
+ * handl_buf - concatenates the buffer characters
+ * @buf: buffer pointer
+ * @c: charcter to concatenate
+ * @ibuf: index of buffer pointer
+ * Return: index of buffer pointer.
  */
-bool fs_register(char sp)
+unsigned int handl_buf(char *buf, char c, unsigned int ibuf)
 {
-	char format_specifiers[] = {
-		'c', 's', '\0'
-	};
-	int i;
-
-	for (i = 0; format_specifiers[i]; i++)
+	if (ibuf == 1024)
 	{
-		if (sp == format_specifiers[i])
-			return (true);
+		print_buf(buf, ibuf);
+		ibuf = 0;
 	}
-	return (false);
-}
-
-/**
- * fs_buf_switcher - A helper function to aid the gen_fs_buf function
- * @sp: confirmed character as a format specifier
- * @j: index to track each FS struct in the fs_buf
- * @fs_buf: a buffer of FS structs generated in the gen_fs_buf function
- *
- * Return: void
- */
-
-void fs_buf_switcher(char sp, int j, FS *fs_buf)
-{
-	switch (sp)
-	{
-		case 'c':
-			fs_buf[j].type = 'c';
-			fs_buf[j].parser = c_parser;
-			break;
-		case 's':
-			fs_buf[j].type = 's';
-			fs_buf[j].parser = s_parser;
-			break;
-	}
+	buf[ibuf] = c;
+	ibuf++;
+	return (ibuf);
 }
