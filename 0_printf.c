@@ -36,10 +36,10 @@ int _printf(const char *format)
 					case '7': space= 7;i++; break;
 					case '8': space= 8;i++; break;
 					case '9': space= 9;i++; break;
-					default: Error("Error : Format is invalid ..."); break;
+					default:  break;
 				}
 			}
-			else if( format[i] == '\')
+			else if( format[i] == '\\')
 			{
 				i++;
 				switch(format[i])
@@ -65,7 +65,6 @@ int _printf(const char *format)
 		}
 	}else{
 		/*Error invalid format*/
-		Error("Error : Format is invalid ...");
 	}
 	
 	return j;
