@@ -19,8 +19,10 @@ int _printf(const char *format ,...)
     const char *traverse; 
     unsigned int i; 
     char *s; 
-
-    //Module 1: Initializing Myprintf's arguments 
+	double db ;
+	
+	char outbuf[2048];
+	
     va_list arg; 
     va_start(arg, format); 
 
@@ -36,14 +38,21 @@ int _printf(const char *format ,...)
 
         traverse++; 
 
-        //Module 2: Fetching and executing arguments
         switch(*traverse) 
         { 
-            case 'c' : i = va_arg(arg,int);     //Fetch char argument
+			case 'f':
+                    db = va_arg(arg, double);
+                    sprintf(outbuf, "%f", db);
+                    for(int j=0;outbuf[j]!='\0';j++){
+                        putchar(outbuf[j]);
+                    }
+  
+                break;           
+		   case 'c' : i = va_arg(arg,int);     //Fetch char argument
                         putchar(i);
                         break; 
-
-            case 'd' : i = va_arg(arg,int);         //Fetch Decimal/Integer argument
+			case 'i' :
+            case 'd' : i = va_arg(arg,int);   //Fetch Decimal/Integer argument
                         if(i<0) 
                         { 
                             i = -i;
@@ -52,6 +61,10 @@ int _printf(const char *format ,...)
                         puts(convert(i,10));
                         break; 
 
+			case 'b': i = va_arg(arg,unsigned int); //Fetch binary representation
+                        puts(convert(i,2));
+                        break; 
+						
             case 'o': i = va_arg(arg,unsigned int); //Fetch Octal representation
                         puts(convert(i,8));
                         break; 
@@ -66,7 +79,6 @@ int _printf(const char *format ,...)
         }   
     } 
 
-    //Module 3: Closing argument list to necessary clean-up
     va_end(arg); 
 } 
 
