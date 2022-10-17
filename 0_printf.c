@@ -1,99 +1,110 @@
 #include "main.h"
 
 /**
- * _printf - a function that produces output 
- * according to a format..
- * @format: character string. 
- * Return: the number of characters printed 
- * excluding the null byte used to end output to strings
+ * gen_fs_buf - generates FS buffers based on number of
+ * variadic arguments
+ * @s: formated string input
+ * @n: number of variadic arguments
+ *
+ * Return: a buffer of FS structs
  */
+FS *gen_fs_buf(char *s, int n)
+{
+	FS *fs_buf;
+	int i = 0, j = 0;
 
- 
- 
- 
-int _printf(const char *format ,...)
-{ 
-    const char *traverse; 
-    unsigned int i; 
-    char *s; 
-	double db ;
-	
-	char outbuf[2048];
-	
-    va_list arg; 
-    va_start(arg, format); 
+	fs_buf = malloc(sizeof(FS) * n);
 
-    for(traverse = format; *traverse != '\0'; traverse++) 
-    { 
-        while( *traverse != '%' ) 
-        { 
-			if( *traverse == '\0') 
-				return 1;
-            putchar(*traverse);
-            traverse++; 
-        } 
+	if (!fs_buf)
+		return (NULL);
 
-        traverse++; 
+	for (; j < n; i++)
+	{
+		if (s[i] == '%')
+		{
+			if (s[i + 1] == ' ')
+				continue;
+			if (fs_register(s[i + 1]))
+			{
+				fs_buf_switcher(s[i + 1], j, fs_buf);
+				j++;
+			}
+		}
+	}
 
-        switch(*traverse) 
-        { 
-			case 'f':
-                    db = va_arg(arg, double);
-                    sprintf(outbuf, "%f", db);
-                    for(int j=0;outbuf[j]!='\0';j++){
-                        putchar(outbuf[j]);
-                    }
-  
-                break;           
-		   case 'c' : i = va_arg(arg,int);     //Fetch char argument
-                        putchar(i);
-                        break; 
-			case 'i' :
-            case 'd' : i = va_arg(arg,int);   //Fetch Decimal/Integer argument
-                        if(i<0) 
-                        { 
-                            i = -i;
-                            putchar('-'); 
-                        } 
-                        puts(convert(i,10));
-                        break; 
+	return (fs_buf);
+}
 
-			case 'b': i = va_arg(arg,unsigned int); //Fetch binary representation
-                        puts(convert(i,2));
-                        break; 
-						
-            case 'o': i = va_arg(arg,unsigned int); //Fetch Octal representation
-                        puts(convert(i,8));
-                        break; 
+/**
+ * str_parser - brings together all functions required to parse
+ * and generate an output string
+ * @format: format input string
+ * @args: va_list
+ * @j: pointer to counter that tracks each char of the output string
+ *
+ * Return: char *
+ */
+char *str_parser(char *format, va_list args, int *j)
+{
+	FS *fs_buf;
+	char *va_arg_str, *out_str;
+	int i = 0, k = 0, l = 0; /* cntrs for format input char, va_arg & its char*/
+	bool is_percent_fs = false; /* checks if format specifier is a % */
 
-            case 's': s = va_arg(arg,char *);       //Fetch string
-                        puts(s); 
-                        break; 
+	out_str = malloc(sizeof(char));
+	fs_buf = gen_fs_buf(format, num_of_vars(format));
 
-            case 'x': i = va_arg(arg,unsigned int); //Fetch Hexadecimal representation
-                        puts(convert(i,16));
-                        break; 
-        }   
-    } 
+	if (!out_str)
+		return (NULL);
 
-    va_end(arg); 
-} 
+	for (; format[i]; i++)
+	{
+		if (check_fmt_spec((format + i), &is_percent_fs, &i))
+		{
+			if (is_percent_fs)
+			{
+				out_str[*j] = '%';
+				is_percent_fs = false;
+				*j += 1;
+			}
+			else
+			{
+				va_arg_str = fs_buf[k].parser(args);
+				for (l = 0; va_arg_str[l]; l++)
+				{
+					out_str[*j] = va_arg_str[l];
+					*j += 1;
+				}
+				k++;
+			}
+		}
+		else
+		{
+			out_str[*j] = format[i];
+			*j += 1;
+		}
+	}
+	out_str[*j] = '\0';
+	return (out_str);
+}
 
+/**
+ * _printf - prints format string
+ * @format: format input string
+ *
+ * Return: int (number of chars)
+ */
+int _printf(char *format, ...)
+{
+	va_list args;
+	int j = 0; /* output string (out_str) character counter */
+	char *formated_str;
 
-char *convert(unsigned int num, int base) 
-{ 
-    static char Representation[]= "0123456789ABCDEF";
-    static char buffer[50]; 
-    char *ptr; 
+	va_start(args, format);
+	formated_str = str_parser(format, args, &j);
+	write(1, formated_str, j);
+	va_end(args);
+	free(formated_str);
 
-    ptr = &buffer[49]; 
-    *ptr = '\0'; 
-
-    do 
-    { 
-        *--ptr = Representation[num%base]; 
-        num /= base; 
-    }while(num != 0); 
-
-    return(ptr); 
+	return (j);
 }
