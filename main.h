@@ -6,4 +6,6 @@
 #include <unistd.h>
 
 int _printf(const char *format ,...);
-char* convert(unsigned int, int);       
+char* convert(unsigned int, int);
+
+#endif
