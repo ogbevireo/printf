@@ -1,4 +1,6 @@
 #include <unistd.h>
+#include <stdio.h>
+#include <stdarg.h>
 #include "main.h"
 
 /**
@@ -9,63 +11,80 @@
  * excluding the null byte used to end output to strings
  */
 
-int _printf(const char *format)
-{
-	int i=0,j=0;
-	int space=0;
-	if( format[i] == '"')
-	{
-		i++;
-		while( format[i] != '"')
-		{
-			if( format[i] == '%')
-			{
-				i++;
-				switch(format[i])
-				{
-					case 'c': break;
-					case 's': break;
-					case '%': _putchar('%');j++; break;
-					case '0': space= 0;i++; break;
-					case '1': space= 1;i++; break;
-					case '2': space= 2;i++; break;
-					case '3': space= 3;i++; break;
-					case '4': space= 4;i++; break;
-					case '5': space= 5;i++; break;
-					case '6': space= 6;i++; break;
-					case '7': space= 7;i++; break;
-					case '8': space= 8;i++; break;
-					case '9': space= 9;i++; break;
-					default:  break;
-				}
-			}
-			else if( format[i] == '\\')
-			{
-				i++;
-				switch(format[i])
-				{
-					case 'n': _putchar('\n');j++;break;
-					case 'a': break;
-					case 'b': break;
-					case 'f': break;
-					case 'r': break;
-					case 't': break;
-					case 'v': break;
-					case '%': _putchar('%');j++; break;
-					case '"': _putchar('"');j++; break;
-					default : _putchar('\\');j++; _putchar(format[i]);j++; break;
-				}
-			}
-			else
-			{
-				_putchar(format[i]);
-				j++;
-			}
-			i++;
-		}
-	}else{
-		/*Error invalid format*/
-	}
-	
-	return j;
+ 
+ 
+ 
+int _printf(const char *format ,...)
+{ 
+    const char *traverse; 
+    unsigned int i; 
+    char *s; 
+
+    //Module 1: Initializing Myprintf's arguments 
+    va_list arg; 
+    va_start(arg, format); 
+
+    for(traverse = format; *traverse != '\0'; traverse++) 
+    { 
+        while( *traverse != '%' ) 
+        { 
+			if( *traverse == '\0') 
+				return 1;
+            putchar(*traverse);
+            traverse++; 
+        } 
+
+        traverse++; 
+
+        //Module 2: Fetching and executing arguments
+        switch(*traverse) 
+        { 
+            case 'c' : i = va_arg(arg,int);     //Fetch char argument
+                        putchar(i);
+                        break; 
+
+            case 'd' : i = va_arg(arg,int);         //Fetch Decimal/Integer argument
+                        if(i<0) 
+                        { 
+                            i = -i;
+                            putchar('-'); 
+                        } 
+                        puts(convert(i,10));
+                        break; 
+
+            case 'o': i = va_arg(arg,unsigned int); //Fetch Octal representation
+                        puts(convert(i,8));
+                        break; 
+
+            case 's': s = va_arg(arg,char *);       //Fetch string
+                        puts(s); 
+                        break; 
+
+            case 'x': i = va_arg(arg,unsigned int); //Fetch Hexadecimal representation
+                        puts(convert(i,16));
+                        break; 
+        }   
+    } 
+
+    //Module 3: Closing argument list to necessary clean-up
+    va_end(arg); 
+} 
+
+
+char *convert(unsigned int num, int base) 
+{ 
+    static char Representation[]= "0123456789ABCDEF";
+    static char buffer[50]; 
+    char *ptr; 
+
+    ptr = &buffer[49]; 
+    *ptr = '\0'; 
+
+    do 
+    { 
+        *--ptr = Representation[num%base]; 
+        num /= base; 
+    }while(num != 0); 
+
+    return(ptr); 
 }
