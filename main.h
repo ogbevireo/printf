@@ -27,9 +27,8 @@ typedef struct flags
 typedef struct printHandler
 {
 	char c;
-	int (*fn)(va_list list, char buffer[],
-	int flags, int width, int precision, int size);
-} fmt_t;
+	int (*f)(va_list ap, flags_t *f);
+} ph;
 
 /* print_nums */
 int print_int(va_list l, flags_t *f);
