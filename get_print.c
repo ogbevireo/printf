@@ -10,7 +10,7 @@
  * printing function
  * Return: a pointer to the matching printing function
  */
-int (*get_print(char s))(va_list l, flags_t *f, int width, int precision, int length)
+int (*get_print(char s))(va_list , flags_t *, int , int , int )
 {
 	ph func_arr[] = {
 		{'i', print_int},
