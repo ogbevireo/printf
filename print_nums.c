@@ -12,11 +12,11 @@ int print_int(va_list l, flags_t *f, int width, int precision, int length)
 	int n = va_arg(l, int);
 	int res = count_digit(n);
 
-	if (f->space == 1 && f->plus == 0 && f->minus == 0 && f->zero == 0 && n >= 0)
+	if (f->space == 1 && f->plus == 0 && n >= 0)
 		res += _putchar(' ');
-	if (f->plus == 1 && n > 0)
+	if (f->plus == 1 && n >= 0)
 		res += _putchar('+');
-	if (f->zero == 1 && n == 0)
+	if (f->zero == 1 )
 		res += _putchar('0');
 	if (f->minus ==1 && n < 0)
 	{
