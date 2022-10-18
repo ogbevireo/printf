@@ -14,8 +14,16 @@ int get_flag(char s, flags_t *f)
 
 	switch (s)
 	{
+		case '0':
+			f->zero = 1;
+			i = 1;
+			break;
 		case '+':
 			f->plus = 1;
+			i = 1;
+			break;
+		case '-':
+			f->minus = 1;
 			i = 1;
 			break;
 		case ' ':
