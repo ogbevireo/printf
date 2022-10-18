@@ -29,7 +29,7 @@ int get_width(const char *format, va_list list)
 		else
 			break;
 	}
-
+	format = p;
 	return (width);
 }
 

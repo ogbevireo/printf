@@ -22,6 +22,7 @@ int get_length(const char *format)
 		length = 2;
 		p++;
 	}	
-	
+
+	format = p;	
 	return (length);
 }

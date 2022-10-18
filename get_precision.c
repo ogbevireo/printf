@@ -35,5 +35,6 @@ int get_precision(const char *format, va_list list)
 			break;
 	}
 
+	format = p;
 	return (precision);
 }
