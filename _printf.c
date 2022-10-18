@@ -42,7 +42,7 @@ int _printf(const char *format, ...)
 			length = get_length(p);
 			pfunc = get_print(*p);
 			count += (pfunc)
-				? pfunc(arguments, &flags, width, precision, length)
+				? pfunc(arguments, &flags, width, precision, length);
 				: _printf("%%%c", *p);
 		} else
 			count += _putchar(*p);
